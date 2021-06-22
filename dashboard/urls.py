@@ -9,7 +9,7 @@ urlpatterns = [
     path('homework',views.homework,name="homework"),
     path('delete-homework/<int:pk>',views.delete_homework,name="delete-homework"),
     path('update-homework/<int:pk>',views.update_homework,name="update-homework"),
-
+    path('youtube',views.youtube,name='youtube'),
 
 
 
