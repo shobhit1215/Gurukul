@@ -13,6 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+#installed django-crispy-forms
+#added in settings
+#imported in template and added filter
+
+
 from django.contrib import admin
 from django.urls import path,include
 
