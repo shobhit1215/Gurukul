@@ -19,6 +19,8 @@ Including another URLconf
 #imported in template and added filter
 
 # pip install youtube-search-python
+#pip install requests
+
 from django.contrib import admin
 from django.urls import path,include
 
