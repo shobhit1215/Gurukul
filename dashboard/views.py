@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Notes,Homework
+from .models import Notes,Homework,Todo
 from .forms import *
 from django.contrib import messages
 from django.views import generic
@@ -95,3 +95,39 @@ def youtube(request):
         form =SearchForm()
 
     return render(request,'dashboard/youtube.html',{'form':form})
+
+def todo(request):
+    if request.method=="POST":
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            try:
+                finished = request.POST["is_finished"]
+                if finished == 'on':
+                    finished = True
+                else:
+                    finished = False
+            except:
+                finished = False
+            todos = Todo(user=request.user,title=request.POST['title'],is_finished=finished)
+            todos.save()
+            messages.success(request,f"Todo added from {request.user.username}")
+
+    else:
+        form = TodoForm()
+    todos =Todo.objects.filter(user=request.user)
+    
+    return render(request,'dashboard/todo.html',{'todos':todos,'form':form})
+
+def update_todo(request,pk=None):
+    print("Hello")
+    todo = Todo.objects.get(id=pk)
+    if todo.is_finished == True:
+        todo.is_finished = False
+    else:
+        todo.is_finished = True
+    todo.save()
+    return redirect('todo')
+
+def delete_todo(request,pk=None):
+    Todo.objects.get(id=pk).delete()
+    return redirect("todo")
