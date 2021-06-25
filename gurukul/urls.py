@@ -20,6 +20,7 @@ Including another URLconf
 
 # pip install youtube-search-python
 #pip install requests
+#pip install wikipedia
 
 from django.contrib import admin
 from django.urls import path,include
